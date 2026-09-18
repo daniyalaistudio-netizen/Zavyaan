@@ -19,6 +19,8 @@ const dayKey = (d) => new Date(d).toISOString().slice(0, 10);
 router.get('/', async (req, res) => {
   try {
     const days = Math.min(90, Math.max(7, Math.floor(num(req.query.days)) || 14));
+    // Staff see operations, not money: finance, costs and vendor balances are owner-only.
+    const isOwner = Boolean(req.admin && req.admin.role === 'owner');
     const [orders, products, categories, summary] = await Promise.all([
       db.getAllOrdersWithItems(),
       db.getProducts({ includeInactive: true, limit: 1000 }),
@@ -84,8 +86,6 @@ router.get('/', async (req, res) => {
     const todayKey = dayKey(new Date());
     const lowStock = products.filter(p => num(p.stock_quantity) <= 5).map(p => ({ id: p.id, title: p.title, stock_quantity: num(p.stock_quantity), is_active: p.is_active }));
 
-    // Staff see operations, not money: finance and vendor balances are owner-only.
-    const isOwner = req.admin && req.admin.role === 'owner';
     res.json({
       success: true,
       role: req.admin ? req.admin.role : 'staff',
