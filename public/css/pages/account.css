@@ -1,0 +1,176 @@
+/* ==========================================================
+   ZAVYAAN PAGES — CUSTOMER ACCOUNT PORTAL
+   ========================================================== */
+
+.account-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+/* Account Sidebar */
+.account-sidebar {
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg) 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.account-user-card {
+  padding: 0 var(--space-lg) var(--space-lg);
+  border-bottom: 1px solid var(--color-border-light);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.account-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-rich-black);
+  color: var(--color-gold-champagne);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  margin: 0 auto var(--space-sm);
+  border: 2px solid var(--color-gold-primary);
+}
+
+.account-nav-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px var(--space-lg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.account-nav-item a:hover,
+.account-nav-item a.active {
+  background-color: var(--color-warm-ivory);
+  color: var(--color-rich-black);
+  border-left: 3px solid var(--color-gold-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Auth Cards (Login & Register) */
+.auth-container {
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+}
+
+.auth-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--color-border-light);
+  margin-bottom: var(--space-xl);
+}
+
+.auth-tab-btn {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.auth-tab-btn.active {
+  color: var(--color-rich-black);
+  border-bottom-color: var(--color-gold-primary);
+}
+
+/* Account Main Panel */
+.account-panel-card {
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.account-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+/* Address Cards Grid */
+.addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.address-card {
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xs);
+  padding: var(--space-lg);
+  background-color: var(--color-warm-ivory);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.address-card.default {
+  border-color: var(--color-gold-primary);
+  background-color: var(--color-pure-white);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Orders History Table */
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border-light);
+  font-size: var(--font-size-sm);
+}
+
+.orders-table th {
+  background-color: var(--color-warm-ivory);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-rich-black);
+  text-transform: uppercase;
+  font-size: var(--font-size-xs);
+}
+
+@media (max-width: 840px) {
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
+  .orders-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

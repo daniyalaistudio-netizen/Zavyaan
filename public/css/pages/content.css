@@ -1,0 +1,47 @@
+/* ==========================================================
+   ZAVYAAN PAGES — STATIC & CONTENT PAGES (ABOUT, CONTACT, FAQ, POLICIES)
+   ========================================================== */
+
+.content-page-card {
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  line-height: 1.8;
+  color: var(--color-charcoal);
+}
+
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.faq-item {
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xs);
+  padding: var(--space-lg);
+  transition: box-shadow var(--transition-fast);
+}
+
+.faq-item:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-question {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-rich-black);
+  margin-bottom: 8px;
+}
+
+.faq-answer {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin: 0;
+}

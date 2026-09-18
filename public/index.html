@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Zavyaan - Discover More. Live Better. Pakistan's premier multi-category e-commerce brand for fashion, jewellery, kids toys, skincare, home living, and electronics with nationwide Cash on Delivery.">
+  <meta name="keywords" content="Zavyaan, Discover More Live Better, Pakistan online shopping, Cash on Delivery, Pakistani fashion, Jewellery, Kids Toys, Skincare, Home Decor, Electronics">
+  <title>ZAVYAAN | Discover More. Live Better.</title>
+  
+  <!-- Design System Tokens & Base Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- Customer & Admin Pages -->
+  <link rel="stylesheet" href="css/pages/home.css">
+  <link rel="stylesheet" href="css/pages/shop.css">
+  <link rel="stylesheet" href="css/pages/product.css">
+  <link rel="stylesheet" href="css/pages/cart.css">
+  <link rel="stylesheet" href="css/pages/checkout.css">
+  <link rel="stylesheet" href="css/pages/order.css">
+  <link rel="stylesheet" href="css/pages/account.css">
+  <link rel="stylesheet" href="css/pages/content.css">
+  <link rel="stylesheet" href="css/pages/admin.css">
+
+  <!-- Responsive Media Queries -->
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- Favicon / Branding -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">
+
+  <!-- Social metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Zavyaan">
+  <meta property="og:title" content="Zavyaan | Discover More. Live Better.">
+  <meta property="og:description" content="Pakistan's premier multi-category store - fashion, jewellery, kids toys, beauty, home living and electronics with nationwide Cash on Delivery.">
+  <meta property="og:image" content="assets/brand/zavyaan-og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Zavyaan | Discover More. Live Better.">
+  <meta name="twitter:description" content="Pakistan's premier multi-category store with nationwide Cash on Delivery.">
+  <meta name="twitter:image" content="assets/brand/zavyaan-og.jpg">
+  <meta name="theme-color" content="#0B0B0B">
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <div class="container">
+      <div class="announcement-text">
+        <span>🚚 <strong>FREE Delivery</strong> Across Pakistan on Orders Over Rs. 2,500</span>
+        <span>•</span>
+        <span>⚡ 100% <strong>Cash on Delivery (COD)</strong> Available</span>
+      </div>
+      <div class="announcement-links">
+        <a href="#track">Track Order</a>
+        <a href="#about">About Zavyaan</a>
+        <a href="#contact">Support</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <header class="header-main">
+    <div class="container header-inner">
+      <!-- Mobile Menu Trigger -->
+      <button class="mobile-nav-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <!-- Brand Logo & Tagline -->
+      <a href="#home" class="logo" aria-label="Zavyaan - home">
+        <img src="assets/brand/zavyaan-mark-black.png" alt="" aria-hidden="true" class="logo-mark" width="256" height="176">
+        <span class="logo-lockup">
+          <span class="logo-text">ZAVYAAN</span>
+          <span class="logo-tagline">Discover More. Live Better.</span>
+        </span>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <form class="search-form" id="header-search-form">
+          <input type="text" id="header-search-input" class="search-input" placeholder="Search fashion, jewellery, toys, skincare, gadgets...">
+          <button type="submit" class="search-btn" aria-label="Search">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Actions -->
+      <div class="header-actions">
+        <a href="#account" class="action-btn" id="header-account-btn" title="Customer Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span class="account-name-label">Account</span>
+        </a>
+
+        <a href="#track" class="action-btn" title="Track Order">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+          <span>Track</span>
+        </a>
+
+        <button class="action-btn" id="header-cart-btn" title="Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="action-badge" id="header-cart-badge">0</span>
+          <span>Cart</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- DESKTOP MEGA MENU NAVIGATION -->
+    <nav class="main-nav">
+      <div class="container">
+        <ul class="nav-list" id="desktop-nav-list">
+          <!-- Populated dynamically by UI.renderNavigation() -->
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MOBILE NAVIGATION DRAWER -->
+  <div class="mobile-drawer-overlay" id="mobile-drawer-overlay"></div>
+  <aside class="mobile-drawer" id="mobile-drawer">
+    <div class="mobile-drawer-header">
+      <div class="logo logo-sm">
+        <img src="assets/brand/zavyaan-mark-black.png" alt="" aria-hidden="true" class="logo-mark" width="256" height="176">
+        <span class="logo-lockup">
+          <span class="logo-text">ZAVYAAN</span>
+          <span class="logo-tagline">Discover More. Live Better.</span>
+        </span>
+      </div>
+      <button id="mobile-drawer-close" style="background: none; border: none; font-size: 1.4rem; cursor: pointer;">✕</button>
+    </div>
+    <div class="mobile-drawer-body" id="mobile-nav-list">
+      <!-- Populated dynamically by UI.renderNavigation() -->
+    </div>
+  </aside>
+
+  <!-- MAIN VIEW CONTAINER (SPA) -->
+  <div id="app-main">
+    <!-- Router renders views here -->
+  </div>
+
+  <!-- PRODUCT QUICK-VIEW MODAL -->
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="product-modal-close">✕</button>
+      <div id="product-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OVER SHOPPING CART DRAWER -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--color-primary-black);">Shopping Cart</h3>
+        <span id="cart-header-count" style="font-size: 0.85rem; color: var(--color-text-secondary);">(0)</span>
+      </div>
+      <button id="cart-drawer-close" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--color-primary-black);">✕</button>
+    </div>
+    <div class="cart-shipping-bar" id="cart-shipping-bar">
+      <!-- Free delivery message -->
+    </div>
+    <div class="cart-body" id="cart-drawer-body">
+      <!-- Cart items rendered here -->
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <span id="cart-drawer-subtotal">Rs. 0</span>
+      </div>
+      <a href="#checkout" class="btn btn-primary btn-lg btn-block" onclick="UI.toggleCartDrawer(false)">
+        Proceed to Checkout &rarr;
+      </a>
+      <button class="btn btn-secondary btn-block" style="margin-top: 8px;" onclick="UI.toggleCartDrawer(false); location.hash='#shop';">
+        Continue Shopping
+      </button>
+    </div>
+  </aside>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo logo-on-dark" style="margin-bottom: 12px;">
+            <img src="assets/brand/zavyaan-mark-white.png" alt="" aria-hidden="true" class="logo-mark" width="256" height="176">
+            <span class="logo-lockup">
+              <span class="logo-text">ZAVYAAN</span>
+              <span class="logo-tagline">Discover More. Live Better.</span>
+            </span>
+          </div>
+          <p style="font-size: 0.88rem; line-height: 1.6; margin-bottom: 20px; color: #BDBDBD; max-width: 380px;">
+            Zavyaan is Pakistan's premier multi-category e-commerce brand delivering curated fashion, artisanal jewellery, STEM toys, skincare, home living, and electronics nationwide with Cash on Delivery.
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <span style="background: rgba(255,255,255,0.06); padding: 5px 12px; border-radius: var(--radius-xs); font-size: 0.75rem; color: var(--color-gold-champagne); border: 1px solid rgba(198,161,91,0.2);">🇵🇰 Nationwide COD</span>
+            <span style="background: rgba(255,255,255,0.06); padding: 5px 12px; border-radius: var(--radius-xs); font-size: 0.75rem; color: #E0E0E0;">Lahore • Karachi • Islamabad</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Categories</h4>
+          <ul class="footer-links" id="footer-category-links">
+            <!-- Populated by FooterComponent from the live (admin-enabled) categories -->
+            <li><a href="#shop">Shop All</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Customer Care</h4>
+          <ul class="footer-links">
+            <li><a href="#track">Track Your Order</a></li>
+            <li><a href="#faq">Frequently Asked Questions</a></li>
+            <li><a href="#shipping-policy">Shipping & Delivery</a></li>
+            <li><a href="#returns-policy">7-Day Easy Return</a></li>
+            <li><a href="#privacy-policy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms & Conditions</a></li>
+            <li><a href="#contact">Contact Support</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-title">Zavyaan Guarantee</h4>
+          <p style="font-size: 0.85rem; color: #BDBDBD; margin-bottom: 16px; line-height: 1.5;">
+            Shop with total peace of mind. Pay cash at your doorstep when your parcel arrives safely.
+          </p>
+          <div style="background: rgba(255,255,255,0.04); padding: 14px 18px; border-radius: var(--radius-xs); border: 1px solid rgba(198,161,91,0.25);">
+            <div style="color: var(--color-gold-primary); font-weight: 700; font-size: 0.85rem; margin-bottom: 3px;">💵 Cash on Delivery Available</div>
+            <div style="font-size: 0.78rem; color: #9E9E9E;">Express shipping across all provinces of Pakistan.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 ZAVYAAN. All rights reserved. Discover More. Live Better.
+        </div>
+        <div style="display: flex; gap: 20px;">
+          <a href="#about" style="color: #9E9E9E;">About</a>
+          <a href="#contact" style="color: #9E9E9E;">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Modular Architecture -->
+  <!-- 1. Shared & Utilities -->
+  <script src="js/shared/utils.js"></script>
+  <script src="js/shared/order-status.js"></script>
+  <script src="js/customer/utils/formatters.js"></script>
+  <script src="js/customer/utils/validators.js"></script>
+  <script src="js/customer/utils/debounce.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/shared/api.js"></script>
+  <script src="js/shared/ui.js"></script>
+  <script src="js/ui.js"></script>
+
+  <!-- 2. Customer Services & State -->
+  <script src="js/customer/services/productService.js"></script>
+  <script src="js/customer/services/categoryService.js"></script>
+  <script src="js/customer/services/settingsService.js"></script>
+  <script src="js/customer/services/collectionService.js"></script>
+  <script src="js/customer/services/cartService.js"></script>
+  <script src="js/customer/services/orderService.js"></script>
+  <script src="js/customer/services/authService.js"></script>
+  <script src="js/customer/services/customerService.js"></script>
+  <script src="js/customer/state/customer-state.js"></script>
+
+  <!-- 3. Customer Components -->
+  <script src="js/customer/components/states.js"></script>
+  <script src="js/customer/components/product-card.js"></script>
+  <script src="js/customer/components/featured-highlights.js"></script>
+  <script src="js/customer/components/promo-banners.js"></script>
+  <script src="js/customer/components/quick-view-modal.js"></script>
+  <script src="js/customer/components/cart-drawer.js"></script>
+  <script src="js/customer/components/header.js"></script>
+  <script src="js/customer/components/footer.js"></script>
+
+  <!-- 4. Customer Pages -->
+  <script src="js/customer/pages/home-page.js"></script>
+  <script src="js/customer/pages/shop-page.js"></script>
+  <script src="js/customer/pages/category-page.js"></script>
+  <script src="js/customer/pages/collection-page.js"></script>
+  <script src="js/customer/pages/product-page.js"></script>
+  <script src="js/customer/pages/cart-page.js"></script>
+  <script src="js/customer/pages/checkout-page.js"></script>
+  <script src="js/customer/pages/order-confirmation-page.js"></script>
+  <script src="js/customer/pages/order-tracking-page.js"></script>
+  <script src="js/customer/pages/account-page.js"></script>
+  <script src="js/customer/pages/content-pages.js"></script>
+
+  <!-- 5. Admin Portal & App Orchestration -->
+  <script src="js/admin.js"></script>
+  <script src="js/admin-ledger.js"></script>
+  <script src="js/admin-import.js"></script>
+  <script src="js/shared/router.js"></script>
+  <script src="js/customer/customer-app.js"></script>
+</body>
+</html>

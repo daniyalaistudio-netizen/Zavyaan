@@ -1,0 +1,29 @@
+{
+  "name": "zavyaan-ecommerce",
+  "version": "1.0.0",
+  "description": "Zavyaan - Modern Multi-Category E-Commerce Platform for Pakistan",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js",
+    "seed": "node server/db/seed.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "pakistan",
+    "dropshipping",
+    "zavyaan",
+    "cash-on-delivery"
+  ],
+  "author": "Zavyaan Team",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.11.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

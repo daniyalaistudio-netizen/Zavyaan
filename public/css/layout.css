@@ -1,0 +1,541 @@
+/* ==========================================================
+   ZAVYAAN DESIGN SYSTEM — LAYOUT & NAVIGATION
+   ========================================================== */
+
+/* Containers */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+}
+
+.container-narrow {
+  max-width: var(--container-narrow);
+}
+
+.container-wide {
+  max-width: var(--container-wide);
+}
+
+.section-padding {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+.section-padding-sm {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+/* App Main SPA Host */
+#app-main {
+  min-height: calc(100vh - 380px);
+  width: 100%;
+}
+
+/* ==========================================================
+   1. ANNOUNCEMENT BAR
+   ========================================================== */
+.announcement-bar {
+  background-color: var(--color-rich-black);
+  color: var(--color-pure-white);
+  font-size: var(--font-size-xs);
+  height: var(--announcement-height);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(198, 161, 91, 0.2);
+  z-index: 100;
+  position: relative;
+}
+
+.announcement-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.announcement-text {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  letter-spacing: 0.02em;
+}
+
+.announcement-text strong {
+  color: var(--color-gold-champagne);
+  font-weight: var(--font-weight-semibold);
+}
+
+.announcement-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.announcement-links a {
+  color: #BDBDBD;
+  transition: color var(--transition-fast);
+}
+
+.announcement-links a:hover {
+  color: var(--color-pure-white);
+}
+
+/* ==========================================================
+   2. MAIN HEADER
+   ========================================================== */
+.header-main {
+  background-color: var(--color-surface);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  border-bottom: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-fast);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  gap: var(--space-lg);
+}
+
+/* Brand Logo */
+/* Horizontal brand lockup: the Zavyaan monogram beside the wordmark and
+   tagline. Blueprint section 2 (Brand). */
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+/* Fixed height, width follows the intrinsic ratio so the mark never distorts. */
+.logo-mark {
+  height: 46px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast);
+}
+.logo:hover .logo-mark { opacity: 0.82; }
+
+.logo-lockup {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.logo-sm .logo-mark { height: 36px; }
+.logo-sm .logo-text { font-size: 1.35rem; }
+
+.logo-on-dark .logo-text { color: var(--color-pure-white); }
+
+.logo-text {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: 0.14em;
+  color: var(--color-rich-black);
+  transition: color var(--transition-fast);
+}
+
+.logo-tagline {
+  font-size: 0.58rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.22em;
+  color: var(--color-gold-primary);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Header Search */
+.search-container {
+  flex: 1;
+  max-width: 520px;
+  margin: 0 var(--space-md);
+  position: relative;
+}
+
+.search-form {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 44px 0 16px;
+  background-color: var(--color-warm-ivory);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-main);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.search-input:focus {
+  background-color: var(--color-pure-white);
+  border-color: var(--color-gold-primary);
+}
+
+.search-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 42px;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.search-btn:hover {
+  color: var(--color-gold-primary);
+}
+
+/* Header Action Buttons */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  position: relative;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-main);
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.action-btn:hover {
+  color: var(--color-gold-primary);
+  background-color: var(--color-gold-subtle);
+}
+
+.action-btn svg {
+  stroke-width: 2;
+}
+
+.action-badge {
+  position: absolute;
+  top: 0;
+  right: 4px;
+  background-color: var(--color-gold-primary);
+  color: var(--color-pure-white);
+  font-size: 0.65rem;
+  font-weight: var(--font-weight-bold);
+  min-width: 18px;
+  height: 18px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* Mobile Nav Toggle */
+.mobile-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-rich-black);
+}
+
+/* ==========================================================
+   3. DESKTOP MEGA MENU NAVIGATION
+   ========================================================== */
+.main-nav {
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  position: relative;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 13px 4px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-rich-black);
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-gold-primary);
+}
+
+.nav-link.deal-link {
+  color: var(--color-gold-muted);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Mega Menu Dropdown */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  width: 760px;
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-xl);
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-xl);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
+  z-index: 150;
+  pointer-events: none;
+}
+
+.nav-item:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.mega-subcats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 24px;
+}
+
+.mega-subcat-item a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  padding: 6px 0;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.mega-subcat-item a:hover {
+  color: var(--color-gold-primary);
+  transform: translateX(4px);
+}
+
+.mega-banner {
+  background: var(--color-warm-ivory);
+  border-radius: var(--radius-xs);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--color-border-light);
+}
+
+.mega-banner-title {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-xs);
+  color: var(--color-rich-black);
+}
+
+.mega-banner-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+
+/* ==========================================================
+   4. MOBILE NAVIGATION DRAWER
+   ========================================================== */
+.mobile-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(11, 11, 11, 0.6);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.mobile-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  max-width: 85vw;
+  height: 100vh;
+  background-color: var(--color-pure-white);
+  z-index: 999;
+  transform: translateX(-100%);
+  transition: transform var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+}
+
+.mobile-drawer.active {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.mobile-drawer-body {
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.mobile-nav-item {
+  border-bottom: 1px solid var(--color-border-light);
+  padding: 8px 0;
+}
+
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-rich-black);
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+.mobile-nav-header a {
+  flex: 1;
+}
+
+.mobile-sub-list {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 0 8px 12px;
+}
+
+.mobile-sub-list.active {
+  display: flex;
+}
+
+.mobile-sub-item a {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  padding: 4px 0;
+}
+
+/* ==========================================================
+   5. FOOTER
+   ========================================================== */
+.footer {
+  background-color: var(--color-rich-black);
+  color: #BDBDBD;
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-xl);
+  border-top: 1px solid rgba(198, 161, 91, 0.25);
+  margin-top: auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.footer-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-pure-white);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-gold-primary);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  color: #BDBDBD;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--color-gold-champagne);
+  transform: translateX(3px);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: var(--font-size-xs);
+  color: #8E8E8E;
+}

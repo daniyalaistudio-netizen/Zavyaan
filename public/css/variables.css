@@ -1,0 +1,110 @@
+/* ==========================================================
+   ZAVYAAN DESIGN SYSTEM — DESIGN TOKENS
+   Brand: ZAVYAAN | Tagline: "Discover More. Live Better."
+   ========================================================== */
+
+:root {
+  /* 1. Core Brand Colors */
+  --color-rich-black: #0B0B0B;
+  --color-charcoal: #1C1C1C;
+  --color-pure-white: #FFFFFF;
+
+  /* 2. Gold Palette (Used Accented, Not Dominant) */
+  --color-gold-primary: #C6A15B;
+  --color-gold-champagne: #D4B77A;
+  --color-gold-muted: #A88445;
+  --color-gold-subtle: rgba(198, 161, 91, 0.12);
+  --color-gold-border: rgba(198, 161, 91, 0.3);
+
+  /* 3. Neutrals & Backgrounds */
+  --color-warm-ivory: #F7F4EE;
+  --color-soft-neutral: #EFEDE8;
+  --color-surface: #FFFFFF;
+  --color-border-light: #E5E1D8;
+  --color-border-medium: #D0CCC4;
+  --color-border-focus: #C6A15B;
+
+  /* 4. Typography Colors */
+  --color-text-main: #0B0B0B;
+  --color-text-secondary: #6B6B6B;
+  --color-text-muted: #8E8E8E;
+  --color-text-light: #FFFFFF;
+  --color-text-gold: #A88445;
+
+  /* 5. Functional & Status Colors
+     The brand palette is strictly Gold / White / Black. Status states are
+     expressed through those three families only: positive and highlight
+     states in gold, neutral/informational in charcoal on soft neutral, and
+     negative states in rich black on ivory with a gold accent border.
+     No red, green or blue anywhere in the UI. */
+  --color-status-success: #A88445;
+  --color-status-success-bg: rgba(198, 161, 91, 0.12);
+  --color-status-warning: #C6A15B;
+  --color-status-warning-bg: #F7F4EE;
+  --color-status-error: #0B0B0B;
+  --color-status-error-bg: #EFEDE8;
+  --color-status-info: #1C1C1C;
+  --color-status-info-bg: #EFEDE8;
+  --color-status-border: rgba(198, 161, 91, 0.3);
+
+  /* Legacy aliases still referenced by the admin panel */
+  --color-primary-black: #0B0B0B;
+  --color-ivory: #F7F4EE;
+
+  /* 6. Typography Tokens (Max 2 Font Families) */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.84rem;    /* 13.5px */
+  --font-size-base: 0.94rem;  /* 15px */
+  --font-size-md: 1.05rem;    /* 16.8px */
+  --font-size-lg: 1.25rem;    /* 20px */
+  --font-size-xl: 1.55rem;    /* 24.8px */
+  --font-size-2xl: 2rem;      /* 32px */
+  --font-size-3xl: 2.5rem;    /* 40px */
+  --font-size-hero: 3.25rem;  /* 52px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* 7. Spacing Scale */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+
+  /* 8. Radii (Modern, Subtle) */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  /* 9. Shadows & Elevation */
+  --shadow-sm: 0 1px 3px rgba(11, 11, 11, 0.04);
+  --shadow-md: 0 4px 14px rgba(11, 11, 11, 0.06);
+  --shadow-lg: 0 12px 28px -4px rgba(11, 11, 11, 0.08);
+  --shadow-xl: 0 20px 36px -6px rgba(11, 11, 11, 0.12);
+  --shadow-gold-glow: 0 0 20px rgba(198, 161, 91, 0.2);
+
+  /* 10. Transitions */
+  --transition-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* 11. Containers & Layout */
+  --container-max-width: 1240px;
+  --container-narrow: 860px;
+  --container-wide: 1380px;
+  --header-height: 74px;
+  --announcement-height: 38px;
+}

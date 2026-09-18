@@ -1,0 +1,400 @@
+/* ==========================================================
+   ZAVYAAN PAGES — HOMEPAGE
+   ========================================================== */
+
+/* Hero Banner — full-width image, no copy */
+.hero-banner {
+  background-color: var(--color-surface);
+  padding: var(--space-lg) 0 var(--space-xl);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.hero-banner-link {
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--color-border-light);
+}
+
+.hero-banner-img {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 42vw, 560px);
+  object-fit: cover;
+  object-position: center;
+  transition: transform var(--transition-slow);
+}
+
+.hero-banner-link:hover .hero-banner-img {
+  transform: scale(1.01);
+}
+
+/* Section Headers */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--space-2xl);
+}
+
+.section-tagline {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gold-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 4px;
+}
+
+.section-title {
+  font-size: var(--font-size-2xl);
+  color: var(--color-rich-black);
+}
+
+/* Collections Showcase (directly beneath the hero) */
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.collection-grid.collection-count-1 { grid-template-columns: minmax(0, 720px); justify-content: center; }
+.collection-grid.collection-count-2 { grid-template-columns: repeat(2, 1fr); }
+.collection-grid.collection-count-4 { grid-template-columns: repeat(4, 1fr); }
+
+.collection-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--color-rich-black);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.collection-card:hover {
+  border-color: var(--color-gold-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.collection-card-media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: var(--color-soft-neutral);
+}
+
+.collection-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.collection-card:hover .collection-card-media img {
+  transform: scale(1.04);
+}
+
+.collection-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--space-lg);
+  border-top: 2px solid var(--color-gold-primary);
+}
+
+.collection-card-subtitle {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gold-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.collection-card-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-rich-black);
+}
+
+.collection-card-link {
+  margin-top: 6px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gold-muted);
+}
+
+/* Category tiles (used on Shop All) */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: var(--space-md);
+}
+
+.category-card {
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.category-card:hover,
+.category-card.active {
+  border-color: var(--color-gold-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.category-card.active {
+  background-color: var(--color-gold-subtle);
+}
+
+.category-card-img {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-pill);
+  object-fit: cover;
+  margin-bottom: var(--space-sm);
+  border: 2px solid var(--color-border-light);
+}
+
+.category-card:hover .category-card-img,
+.category-card.active .category-card-img {
+  border-color: var(--color-gold-primary);
+}
+
+.category-card-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-rich-black);
+}
+
+/* Promotional Banners */
+.promo-banners-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.promo-banners-grid.promo-count-1 { grid-template-columns: 1fr; }
+.promo-banners-grid.promo-count-2 { grid-template-columns: 1fr 1fr; }
+
+.promo-kind-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.promo-banner-card {
+  padding: var(--space-2xl);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-bg-dark {
+  background-color: var(--color-rich-black);
+  color: var(--color-pure-white);
+  border: 1px solid rgba(198, 161, 91, 0.3);
+}
+
+.promo-bg-ivory {
+  background-color: var(--color-warm-ivory);
+  color: var(--color-rich-black);
+  border: 1px solid var(--color-border-medium);
+}
+
+.promo-bg-gold {
+  background-color: var(--color-gold-primary);
+  color: var(--color-rich-black);
+  border: 1px solid var(--color-gold-muted);
+}
+
+.promo-bg-gold .badge-sale {
+  background-color: var(--color-rich-black);
+  color: var(--color-gold-champagne);
+}
+
+.promo-bg-gold .promo-tag,
+.promo-bg-ivory .promo-tag {
+  color: var(--color-gold-muted);
+}
+
+.promo-bg-gold .promo-tag {
+  color: var(--color-rich-black);
+}
+
+.promo-bg-gold .promo-desc {
+  opacity: 0.9;
+}
+
+.promo-tag {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-gold-primary);
+}
+
+.promo-heading {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-sm);
+  color: inherit; /* base.css sets heading colour; banners set their own */
+}
+
+.promo-bg-dark .promo-heading {
+  color: var(--color-pure-white);
+}
+
+.promo-desc {
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  margin-bottom: var(--space-lg);
+  opacity: 0.85;
+  max-width: 380px;
+}
+
+/* Trust Features Grid */
+.trust-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+}
+
+.trust-card {
+  background-color: var(--color-pure-white);
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  transition: transform var(--transition-fast);
+}
+
+.trust-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.trust-icon-box {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.trust-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-rich-black);
+  margin-bottom: 4px;
+}
+
+.trust-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Zavyaan Insiders subscription */
+.insiders-form {
+  display: flex;
+  gap: 8px;
+  max-width: 480px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.insiders-form input[type="email"] {
+  flex: 1;
+  min-width: 240px;
+  padding: 12px 18px;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(198, 161, 91, 0.3);
+  font-size: 0.9rem;
+  background: var(--color-charcoal);
+  color: var(--color-pure-white);
+}
+
+.insiders-form input[type="email"]:focus {
+  outline: none;
+  border-color: var(--color-gold-primary);
+  box-shadow: 0 0 0 3px rgba(198, 161, 91, 0.2);
+}
+
+.insiders-form .btn {
+  padding: 12px 24px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Responsive Homepage */
+@media (max-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  .hero-image-card img {
+    height: 340px;
+  }
+  .promo-banners-grid,
+  .promo-banners-grid.promo-count-2 {
+    grid-template-columns: 1fr;
+  }
+  .trust-features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .collection-grid,
+  .collection-grid.collection-count-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .collection-grid,
+  .collection-grid.collection-count-2,
+  .collection-grid.collection-count-4 {
+    grid-template-columns: 1fr;
+  }
+  .hero-banner {
+    padding: var(--space-sm) 0 var(--space-lg);
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-features-list {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  .trust-features-grid {
+    grid-template-columns: 1fr;
+  }
+}

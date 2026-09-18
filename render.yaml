@@ -1,0 +1,25 @@
+# Render Blueprint — deploys the Zavyaan store (shop + admin + API) as one web service.
+# Database: an external PostgreSQL (Neon free tier recommended). Paste its connection
+# string into DATABASE_URL when Render asks. Render's own free Postgres is deleted after
+# 30 days, which is why it is not provisioned here.
+services:
+  - type: web
+    name: zavyaan-store
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false            # Neon connection string (postgresql://...?sslmode=require)
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false            # choose a strong password in the Render dashboard
+      - key: SESSION_SECRET
+        generateValue: true    # signs admin session tokens
+      - key: ADMIN_IDLE_MINUTES
+        value: "30"

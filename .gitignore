@@ -1,0 +1,12 @@
+node_modules/
+.env
+.DS_Store
+*.log
+# local JSON store (development only)
+server/data/
+data/
+# locally uploaded product images (on PostgreSQL they live in the database)
+public/uploads/products/*
+!public/uploads/products/.gitkeep
+# scratch
+*.tmp

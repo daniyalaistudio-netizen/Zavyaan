@@ -1,0 +1,189 @@
+/* ==========================================================
+   ZAVYAAN PAGES — CART DRAWER & CART PAGE
+   ========================================================== */
+
+/* Cart Drawer */
+.cart-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(11, 11, 11, 0.65);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.cart-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 420px;
+  max-width: 90vw;
+  height: 100vh;
+  background-color: var(--color-pure-white);
+  z-index: 1002;
+  transform: translateX(100%);
+  transition: transform var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+}
+
+.cart-drawer.active {
+  transform: translateX(0);
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+/* Free Shipping Meter (Rs. 2,500 Threshold) */
+.cart-shipping-bar {
+  background-color: var(--color-warm-ivory);
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.shipping-progress-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-rich-black);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.shipping-progress-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--color-border-medium);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.shipping-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-gold-muted) 0%, var(--color-gold-primary) 100%);
+  border-radius: var(--radius-pill);
+  transition: width var(--transition-normal);
+}
+
+/* Cart Items Body */
+.cart-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.cart-item {
+  display: flex;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border-light);
+  position: relative;
+}
+
+.cart-item-img {
+  width: 76px;
+  height: 84px;
+  border-radius: var(--radius-xs);
+  object-fit: cover;
+  background-color: var(--color-warm-ivory);
+  border: 1px solid var(--color-border-light);
+  flex-shrink: 0;
+}
+
+.cart-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-title {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-rich-black);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.cart-item-variant {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+
+.cart-item-price {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-rich-black);
+  margin-bottom: 8px;
+}
+
+.cart-item-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.cart-remove-btn {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  transition: color var(--transition-fast);
+}
+
+.cart-remove-btn:hover {
+  color: var(--color-status-error);
+}
+
+/* Cart Footer */
+.cart-footer {
+  padding: var(--space-lg);
+  background-color: var(--color-warm-ivory);
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-rich-black);
+}
+
+/* Standalone Cart Page */
+.cart-page-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .cart-drawer {
+    width: 100vw;
+    max-width: 100vw;
+  }
+  .cart-page-grid {
+    grid-template-columns: 1fr;
+  }
+}

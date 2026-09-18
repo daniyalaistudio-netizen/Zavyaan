@@ -1,0 +1,215 @@
+/* ==========================================================
+   ZAVYAAN PAGES — CHECKOUT UI
+   ========================================================== */
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+
+.checkout-card {
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.checkout-section-title {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-lg);
+  color: var(--color-rich-black);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkout-step-num {
+  width: 28px;
+  height: 28px;
+  background-color: var(--color-rich-black);
+  color: var(--color-pure-white);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Payment Selector (Step B11: COD & Advance Payment) */
+.payment-methods-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: var(--space-md);
+}
+
+.payment-option-card {
+  border: 2px solid var(--color-border-light);
+  border-radius: var(--radius-xs);
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  background-color: var(--color-surface);
+}
+
+.payment-option-card:hover {
+  border-color: var(--color-gold-border);
+}
+
+.payment-option-card.selected {
+  border-color: var(--color-gold-primary);
+  background-color: rgba(198, 161, 91, 0.04);
+}
+
+.payment-option-radio {
+  margin-top: 3px;
+  accent-color: var(--color-gold-primary);
+}
+
+.payment-option-body {
+  flex: 1;
+}
+
+.payment-option-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-rich-black);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-option-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.advance-discount-badge {
+  background-color: var(--color-rich-black);
+  color: var(--color-gold-primary);
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-bold);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(198, 161, 91, 0.55);
+}
+
+.payment-option-card.disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.payment-instructions {
+  background: var(--color-warm-ivory);
+  padding: 12px 14px;
+  border-radius: var(--radius-xs);
+  margin-top: 12px;
+  border: 1px solid var(--color-gold-border);
+  font-size: var(--font-size-xs);
+  color: var(--color-charcoal);
+  line-height: 1.5;
+}
+
+.payment-unavailable {
+  background: var(--color-soft-neutral);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--radius-xs);
+  padding: 16px;
+  font-size: var(--font-size-sm);
+  color: var(--color-rich-black);
+}
+
+/* Future Gateway Placeholder Box */
+.advance-gateway-box {
+  display: none;
+  background: var(--color-warm-ivory);
+  padding: 14px;
+  border-radius: var(--radius-xs);
+  margin-top: 12px;
+  border: 1px solid var(--color-border-light);
+  font-size: var(--font-size-xs);
+}
+
+.advance-gateway-box.active {
+  display: block;
+}
+
+.gateway-logos {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.gateway-logo-chip {
+  padding: 4px 10px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-xs);
+  font-weight: var(--font-weight-bold);
+  font-size: 0.72rem;
+  color: var(--color-charcoal);
+}
+
+/* Order Summary Box */
+.checkout-summary-box {
+  background-color: var(--color-warm-ivory);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xl);
+}
+
+.checkout-item-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.checkout-totals-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: var(--space-md);
+}
+
+.checkout-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.checkout-row strong {
+  color: var(--color-rich-black);
+}
+
+.checkout-row.discount-row,
+.checkout-row.discount-row strong {
+  color: var(--color-gold-muted);
+}
+
+.checkout-row.total-row {
+  font-size: 1.35rem;
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-rich-black);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border-medium);
+  margin-top: 6px;
+}
+
+@media (max-width: 992px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
+}

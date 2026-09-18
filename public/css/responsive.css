@@ -1,0 +1,160 @@
+/* ==========================================================
+   ZAVYAAN DESIGN SYSTEM — RESPONSIVE MEDIA QUERIES
+   ========================================================== */
+
+/* Laptop & Medium Desktop (max-width: 1200px) */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 100%;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .mega-menu {
+    width: 680px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: var(--space-xl);
+  }
+}
+
+/* Tablet (max-width: 992px) */
+@media (max-width: 992px) {
+  .main-nav {
+    display: none; /* Collapses to mobile drawer */
+  }
+
+  .mobile-nav-toggle {
+    display: flex;
+  }
+
+  .header-inner {
+    height: 64px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .section-padding {
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+  }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+  :root {
+    --font-size-hero: 2.3rem;
+    --font-size-3xl: 1.95rem;
+    --font-size-2xl: 1.65rem;
+  }
+
+  .announcement-bar {
+    font-size: 0.7rem;
+  }
+
+  .announcement-links {
+    display: none; /* Hide secondary links on mobile */
+  }
+
+  .announcement-bar .container {
+    justify-content: center;
+  }
+
+  .header-actions .action-btn span:not(.action-badge) {
+    display: none; /* Icon-only action buttons */
+  }
+
+  .search-container {
+    margin: 0 var(--space-xs);
+  }
+
+  .logo-text {
+    font-size: 1.3rem;
+  }
+
+  .logo-tagline {
+    font-size: 0.52rem;
+  }
+
+  .logo-mark {
+    height: 38px;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+
+  .form-row-2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .modal-container {
+    width: 96vw;
+    max-height: 94vh;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .toast-container {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .toast {
+    min-width: unset;
+    width: 100%;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .header-inner {
+    gap: var(--space-xs);
+  }
+
+  /* On the narrowest screens the header shows the monogram alone: the search
+     field needs the width, and a clipped wordmark looks broken.
+     The full lockup still appears in the drawer and footer.
+     Blueprint B8 - no horizontal overflow. */
+  .header-inner .logo {
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .header-inner .logo-mark {
+    height: 34px;
+  }
+
+  .header-inner .logo-lockup {
+    display: none;
+  }
+
+  .search-container {
+    position: static;
+  }
+
+  .btn {
+    padding: 9px 16px;
+  }
+
+  .btn-lg {
+    padding: 12px 20px;
+    font-size: var(--font-size-sm);
+  }
+}

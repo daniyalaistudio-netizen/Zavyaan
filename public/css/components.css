@@ -1,0 +1,362 @@
+/* ==========================================================
+   ZAVYAAN DESIGN SYSTEM — REUSABLE COMPONENTS
+   ========================================================== */
+
+/* ==========================================================
+   1. BUTTONS
+   ========================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 10px 20px;
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-xs);
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--color-rich-black);
+  color: var(--color-pure-white);
+  border-color: var(--color-rich-black);
+}
+
+.btn-primary:hover {
+  background-color: #222222;
+  color: var(--color-gold-champagne);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-gold {
+  background-color: var(--color-gold-primary);
+  color: var(--color-rich-black);
+  border-color: var(--color-gold-primary);
+}
+
+.btn-gold:hover {
+  background-color: var(--color-gold-champagne);
+  box-shadow: var(--shadow-gold-glow);
+}
+
+.btn-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-rich-black);
+  border-color: var(--color-border-medium);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-gold-primary);
+  color: var(--color-gold-muted);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-pure-white);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-gold-champagne);
+  color: var(--color-gold-champagne);
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: var(--font-size-xs);
+}
+
+.btn-lg {
+  padding: 14px 28px;
+  font-size: var(--font-size-base);
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ==========================================================
+   2. BADGES & TAGS
+   ========================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Sale / discount tags: gold text on rich black with a gold accent border,
+   so "-30% OFF" reads as a premium highlight rather than a red alert. */
+.badge-sale {
+  background-color: var(--color-rich-black);
+  color: var(--color-gold-primary);
+  border: 1px solid rgba(198, 161, 91, 0.55);
+}
+
+.badge-bestseller {
+  background-color: var(--color-rich-black);
+  color: var(--color-gold-champagne);
+  border: 1px solid rgba(198, 161, 91, 0.4);
+}
+
+.badge-featured {
+  background-color: var(--color-gold-subtle);
+  color: var(--color-gold-muted);
+  border: 1px solid var(--color-gold-border);
+}
+
+.badge-cod {
+  background-color: var(--color-gold-subtle);
+  color: var(--color-gold-muted);
+  border: 1px solid var(--color-gold-border);
+}
+
+.badge-stock {
+  background-color: var(--color-warm-ivory);
+  color: var(--color-charcoal);
+  border: 1px solid var(--color-border-light);
+}
+
+/* ==========================================================
+   3. FORMS & INPUTS
+   ========================================================== */
+.form-group {
+  margin-bottom: var(--space-md);
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-rich-black);
+  margin-bottom: 6px;
+}
+
+.form-label .req {
+  color: var(--color-status-error);
+}
+
+.form-control {
+  width: 100%;
+  padding: 11px 15px;
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-main);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+  border-color: var(--color-gold-primary);
+  box-shadow: 0 0 0 3px rgba(198, 161, 91, 0.15);
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+/* Quantity Control */
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-xs);
+  background-color: var(--color-pure-white);
+  overflow: hidden;
+}
+
+.qty-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: 1.1rem;
+  color: var(--color-rich-black);
+  background-color: var(--color-warm-ivory);
+  transition: background-color var(--transition-fast);
+}
+
+.qty-btn:hover {
+  background-color: var(--color-soft-neutral);
+}
+
+.qty-input {
+  width: 44px;
+  height: 38px;
+  text-align: center;
+  border: none;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  color: var(--color-rich-black);
+}
+
+/* ==========================================================
+   4. MODALS & POPUPS
+   ========================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(11, 11, 11, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  background-color: var(--color-pure-white);
+  border-radius: var(--radius-sm);
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: var(--shadow-xl);
+  transform: scale(0.95);
+  transition: transform var(--transition-normal);
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-warm-ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--color-rich-black);
+  z-index: 10;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background-color: var(--color-rich-black);
+  color: var(--color-pure-white);
+}
+
+/* ==========================================================
+   5. SKELETON LOADERS & EMPTY/ERROR STATES
+   ========================================================== */
+.skeleton {
+  background: linear-gradient(90deg, #f0ede6 25%, #f7f5f0 50%, #f0ede6 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.4s infinite ease-in-out;
+  border-radius: var(--radius-xs);
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.empty-state {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-lg);
+  background-color: var(--color-pure-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-sm);
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+  opacity: 0.8;
+}
+
+.empty-state-title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-xs);
+}
+
+.empty-state-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  max-width: 420px;
+  margin: 0 auto var(--space-lg);
+}
+
+.error-state {
+  text-align: center;
+  padding: var(--space-2xl);
+  background-color: var(--color-status-error-bg);
+  border: 1px solid var(--color-gold-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-status-error);
+}
+
+/* ==========================================================
+   6. TOAST NOTIFICATIONS
+   ========================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  background-color: var(--color-rich-black);
+  color: var(--color-pure-white);
+  padding: 14px 20px;
+  border-radius: var(--radius-xs);
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-left: 3px solid var(--color-gold-primary);
+  min-width: 280px;
+  max-width: 420px;
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}

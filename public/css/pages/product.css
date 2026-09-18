@@ -1,0 +1,206 @@
+/* ==========================================================
+   ZAVYAAN PAGES — PRODUCT DETAIL PAGE (PDP) & QUICK VIEW
+   ========================================================== */
+
+.pdp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  padding: var(--space-xl);
+}
+
+/* Gallery */
+.pdp-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.pdp-main-image {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  background-color: var(--color-warm-ivory);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--color-border-light);
+}
+
+.pdp-main-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.pdp-thumbs-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.pdp-thumb {
+  width: 70px;
+  height: 70px;
+  border-radius: var(--radius-xs);
+  overflow: hidden;
+  border: 2px solid var(--color-border-light);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color var(--transition-fast);
+}
+
+.pdp-thumb.active,
+.pdp-thumb:hover {
+  border-color: var(--color-gold-primary);
+}
+
+.pdp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Details */
+.pdp-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.pdp-title {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-sm);
+  line-height: 1.25;
+}
+
+.pdp-price-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.pdp-current-price {
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-rich-black);
+}
+
+/* Flexible Variants */
+.variant-group-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-rich-black);
+  margin-bottom: 8px;
+}
+
+.variant-options-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: var(--space-md);
+}
+
+.variant-chip {
+  padding: 8px 16px;
+  background-color: var(--color-warm-ivory);
+  border: 1px solid var(--color-border-medium);
+  border-radius: var(--radius-xs);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.variant-chip:hover,
+.variant-chip.selected {
+  background-color: var(--color-rich-black);
+  color: var(--color-gold-champagne);
+  border-color: var(--color-rich-black);
+}
+
+/* CTAs */
+.pdp-cta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+/* Trust Pills */
+.pdp-trust-pills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background-color: var(--color-warm-ivory);
+  padding: var(--space-md);
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border-light);
+}
+
+.pdp-trust-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-xs);
+  color: var(--color-charcoal);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Tabs */
+.pdp-tabs {
+  margin-top: var(--space-3xl);
+  border-top: 1px solid var(--color-border-light);
+  padding-top: var(--space-2xl);
+}
+
+.pdp-tab-nav {
+  display: flex;
+  gap: var(--space-lg);
+  border-bottom: 1px solid var(--color-border-light);
+  margin-bottom: var(--space-lg);
+}
+
+.pdp-tab-btn {
+  padding: 10px 4px;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.pdp-tab-btn.active {
+  color: var(--color-rich-black);
+  border-bottom-color: var(--color-gold-primary);
+}
+
+.pdp-tab-content {
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+  color: var(--color-charcoal);
+}
+
+/* Responsive PDP */
+@media (max-width: 768px) {
+  .pdp-grid {
+    grid-template-columns: 1fr;
+    padding: var(--space-md);
+    gap: var(--space-lg);
+  }
+  .pdp-title {
+    font-size: var(--font-size-xl);
+  }
+  .pdp-cta-row {
+    grid-template-columns: 1fr;
+  }
+  .pdp-trust-pills {
+    grid-template-columns: 1fr;
+  }
+}

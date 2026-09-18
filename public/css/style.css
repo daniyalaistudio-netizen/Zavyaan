@@ -1,0 +1,27 @@
+/* ==========================================================
+   ZAVYAAN OFFICIAL MASTER STYLESHEET
+   Brand: ZAVYAAN | Tagline: "Discover More. Live Better."
+   Modular architecture: tokens, base, layout, components, pages
+   ========================================================== */
+
+/* 1. Design Tokens & Base */
+@import url('variables.css');
+@import url('base.css');
+
+/* 2. Global Layout & Components */
+@import url('layout.css');
+@import url('components.css');
+
+/* 3. Customer & Admin Pages */
+@import url('pages/home.css');
+@import url('pages/shop.css');
+@import url('pages/product.css');
+@import url('pages/cart.css');
+@import url('pages/checkout.css');
+@import url('pages/order.css');
+@import url('pages/account.css');
+@import url('pages/content.css');
+@import url('pages/admin.css');
+
+/* 4. Responsive Rules & Media Queries */
+@import url('responsive.css');
