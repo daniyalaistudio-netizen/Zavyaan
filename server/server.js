@@ -77,12 +77,13 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'));
 });
 
-app.listen(PORT, async () => {
-  await initStore();
+// Verify the schema and seed BEFORE accepting traffic, so the first request
+// (or a health check) never sees an empty database.
+initStore().then(() => app.listen(PORT, () => {
   console.log(`\n======================================================`);
   console.log(`  ZAVYAAN E-COMMERCE SERVER IS RUNNING`);
   console.log(`  URL: http://localhost:${PORT}`);
   console.log(`  Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`  Database: ${db.isPostgres() ? 'PostgreSQL' : 'Embedded JSON'}`);
   console.log(`======================================================\n`);
-});
+}));

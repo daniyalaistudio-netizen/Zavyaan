@@ -3,7 +3,8 @@ const path = require('path');
 const { Pool } = require('pg');
 const StoreSettings = require('../utils/store-settings');
 
-const DATA_DIR = path.join(__dirname, '..', 'data');
+// ZAVYAAN_DATA_DIR lets tests point the local store at a temp folder.
+const DATA_DIR = process.env.ZAVYAAN_DATA_DIR || path.join(__dirname, '..', 'data');
 const LOCAL_STORE_FILE = path.join(DATA_DIR, 'store.json');
 
 // Ensure data directory exists

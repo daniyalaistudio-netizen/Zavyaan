@@ -1,0 +1,90 @@
+# ==========================================================
+# Zavyaan — Continuous Integration / Deployment
+# ==========================================================
+# On every push and pull request:
+#   1. check   — install, syntax-check every JS file
+#   2. test    — boot the app against a fresh PostgreSQL and run the
+#                end-to-end suite (test/smoke.test.js); also once against
+#                the local JSON store
+# On push to main, after tests pass:
+#   3. deploy  — trigger the Render deploy hook (secret RENDER_DEPLOY_HOOK).
+#                If the secret is not set, Render's own auto-deploy on push
+#                still applies; this job just makes "deploy only if green"
+#                explicit.
+# ==========================================================
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Install & syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+
+  test:
+    name: End-to-end tests
+    needs: check
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: zavyaan_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Tests on PostgreSQL (what production uses)
+        run: npm test
+        env:
+          DATABASE_URL: postgresql://postgres:test@localhost:5432/zavyaan_test
+      - name: Tests on local JSON store (developer mode)
+        run: npm test
+        env:
+          TEST_PORT: '5712'
+
+  deploy:
+    name: Deploy to Render
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Trigger Render deploy hook
+        env:
+          HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "RENDER_DEPLOY_HOOK secret not set — relying on Render auto-deploy for this push."
+            exit 0
+          fi
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$HOOK")
+          echo "Render responded HTTP $code"
+          [ "$code" = "200" ] || [ "$code" = "201" ]

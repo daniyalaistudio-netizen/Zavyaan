@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "node server/server.js",
-    "seed": "node server/db/seed.js"
+    "seed": "node server/db/seed.js",
+    "lint": "node scripts/check-syntax.js",
+    "test": "node --test test/"
   },
   "keywords": [
     "ecommerce",
