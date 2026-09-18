@@ -30,6 +30,7 @@ const Admin = {
     else if (tabName === 'vendors') this.renderVendors();
     else if (tabName === 'expenses') this.renderExpenses();
     else if (tabName === 'accounts') this.renderAccounts();
+    else if (tabName === 'users') this.renderUsers();
 
     // Live order feed only runs while the dashboard is open
     if (tabName !== 'dashboard') this.stopLivePolling();
@@ -91,7 +92,7 @@ const Admin = {
 
       const byDay = a.by_day.map(d => ({ label: shortDay(d.date), short: String(new Date(d.date).getUTCDate()).padStart(2, '0'), value: d.orders, hint: fmtP(d.revenue) }));
       const byCategory = a.by_category.map(c => ({ label: c.name, value: c.units, hint: `${c.orders} order${c.orders === 1 ? '' : 's'} · ${fmtP(c.revenue)}` }));
-      const byProduct = a.by_product.slice(0, 8).map(p => ({ label: p.title, value: p.units, hint: `${fmtP(p.revenue)} revenue · ${fmtP(p.profit)} profit` }));
+      const byProduct = a.by_product.slice(0, 8).map(p => ({ label: p.title, value: p.units, hint: `${fmtP(p.revenue)} revenue${p.profit !== null && p.profit !== undefined ? ' · ' + fmtP(p.profit) + ' profit' : ''}` }));
       const byStatus = a.by_status.filter(x => x.count > 0).map(x => ({ label: x.status, value: x.count }));
 
       content.innerHTML = `
@@ -120,19 +121,20 @@ const Admin = {
           ${this.kpi('Avg. order value', fmtP(k.average_order_value), '🧾', `${k.orders_total} orders total`)}
         </div>
 
-        <!-- Money -->
+        <!-- Money (owner only — staff accounts don't receive finance data) -->
+        ${f ? `
         <div class="stats-kpi-grid">
           ${this.kpi('Revenue', fmtP(f.revenue), '💰', 'all completed & in-progress sales')}
           ${this.kpi('Cost of goods', fmtP(f.cogs), '📦', `${f.gross_margin_pct}% gross margin`)}
           ${this.kpi('Expenses', fmtP(f.expenses), '📉')}
           ${this.kpi('Net profit', fmtP(f.net_profit), f.net_profit >= 0 ? '📈' : '⚠️', `${f.net_margin_pct}% of revenue`, f.net_profit >= 0 ? 'kpi-good' : 'kpi-warn')}
           ${this.kpi('Owed to vendors', fmtP(a.vendor_totals.pending_balance), '🏭', `${a.vendor_totals.items_sourced} items sourced`, a.vendor_totals.pending_balance > 0 ? 'kpi-warn' : '')}
-        </div>
+        </div>` : ''}
 
         <!-- Stock -->
         <div class="stats-kpi-grid">
           ${this.kpi('Products live', `${k.products_live} / ${k.products_total}`, '🛍️')}
-          ${this.kpi('Units in stock', k.stock_units.toLocaleString('en-PK'), '📦', fmtP(k.stock_value_at_cost) + ' at landed cost')}
+          ${this.kpi('Units in stock', k.stock_units.toLocaleString('en-PK'), '📦', k.stock_value_at_cost !== null && k.stock_value_at_cost !== undefined ? fmtP(k.stock_value_at_cost) + ' at landed cost' : '')}
           ${this.kpi('Low stock (≤ 5)', k.low_stock, '↓', k.low_stock > 0 ? 'reorder soon' : 'all healthy', k.low_stock > 0 ? 'kpi-warn' : '')}
         </div>
 
@@ -153,7 +155,7 @@ const Admin = {
             ${byCategory.length ? AdminCharts.hbars(byCategory, { id: 'chart-cat', labelHead: 'Category', valueHead: 'Units' }) : '<div class="empty-cell">No sales yet.</div>'}
           </section>
           <section class="admin-card">
-            <div class="admin-card-head"><h3>Top products by units</h3><span class="card-sub">hover for revenue & profit</span></div>
+            <div class="admin-card-head"><h3>Top products by units</h3><span class="card-sub">hover for revenue${f ? ' & profit' : ''}</span></div>
             ${byProduct.length ? AdminCharts.hbars(byProduct, { id: 'chart-prod', labelHead: 'Product', valueHead: 'Units' }) : '<div class="empty-cell">No sales yet.</div>'}
           </section>
         </div>
@@ -1168,6 +1170,133 @@ const Admin = {
     } catch (e) {
       modalBody.innerHTML = `<div style="color: var(--color-status-error); padding: 30px;">Error: ${e.message}</div>`;
     }
+  },
+
+  // Admin Users (owner only)
+  cachedUsers: [],
+  async renderUsers() {
+    const content = document.getElementById('admin-tab-content');
+    content.innerHTML = `<div class="admin-loading">Loading users...</div>`;
+    try {
+      const { users } = await API.getAdminUsers();
+      this.cachedUsers = users;
+      const esc = (v) => Utils.escapeHtml(String(v === undefined || v === null ? '' : v));
+      const me = window.AdminUser || {};
+      content.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <h2 style="font-size: 1.5rem; color: var(--color-primary-black);">Admin Users</h2>
+            <p style="color: var(--color-text-secondary); font-size: 0.85rem;">Everyone who can sign in to this panel. <strong>Owner</strong> = everything incl. accounts &amp; users · <strong>Staff</strong> = products, orders, storefront (no finance).</p>
+          </div>
+          <button class="btn btn-primary" onclick="Admin.openUserModal()">+ Add Admin User</button>
+        </div>
+        <div class="table-responsive">
+          <table class="admin-table">
+            <thead><tr><th>User</th><th>Username</th><th>Role</th><th>Access</th><th>Last sign-in</th><th>Actions</th></tr></thead>
+            <tbody>
+              ${users.map(u => `
+                <tr class="${u.is_active ? '' : 'row-disabled'}">
+                  <td><strong>${esc(u.display_name)}</strong>${u.id === me.id ? ' <span class="badge badge-featured">you</span>' : ''}${u.email ? `<br><small style="color: var(--color-text-secondary);">${esc(u.email)}</small>` : ''}</td>
+                  <td><code>${esc(u.username)}</code></td>
+                  <td><span class="badge ${u.role === 'owner' ? 'badge-bestseller' : 'badge-stock'}">${esc(u.role)}</span></td>
+                  <td>${u.id === me.id ? '<span style="font-size: 0.78rem; color: var(--color-text-secondary);">active</span>' : this.toggleSwitch(u.is_active, `Admin.toggleUserActive('${u.id}', this.checked)`, 'Active', 'Disabled', 'sm')}</td>
+                  <td style="font-size: 0.82rem;">${u.last_login_at ? new Date(u.last_login_at).toLocaleString('en-PK') : '<span style="color: var(--color-text-muted);">never</span>'}</td>
+                  <td style="white-space: nowrap;">
+                    <button class="btn btn-sm btn-secondary" onclick="Admin.openUserModal('${u.id}')">Edit</button>
+                    ${u.id === me.id ? '' : `<button class="btn btn-sm btn-secondary" onclick="Admin.deleteUser('${u.id}')">🗑</button>`}
+                  </td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>`;
+    } catch (e) {
+      content.innerHTML = `<div class="admin-error">${Utils.escapeHtml(e.message)}</div>`;
+    }
+  },
+
+  openUserModal(id = null) {
+    const u = id ? this.cachedUsers.find(x => x.id === id) : null;
+    const esc = (v) => Utils.escapeHtml(String(v === undefined || v === null ? '' : v));
+    const modal = document.getElementById('admin-modal'); const body = document.getElementById('admin-modal-body');
+    body.innerHTML = `
+      <h3 class="modal-title">${u ? 'Edit Admin User' : 'Add Admin User'}</h3>
+      <p class="modal-sub">${u ? 'Leave the password empty to keep the current one. Setting a new password signs that person out everywhere.' : 'They sign in at /#admin with this username and password and can change the password themselves afterwards.'}</p>
+      <form onsubmit="Admin.handleSaveUser(event, ${u ? `'${u.id}'` : 'null'})">
+        <div class="form-row-2">
+          <div class="form-group"><label class="form-label">Full name</label><input id="au-name" class="form-control" value="${esc(u && u.display_name)}" placeholder="e.g. Anus Shareef"></div>
+          <div class="form-group"><label class="form-label">Username <span class="req">*</span></label><input id="au-username" class="form-control" value="${esc(u && u.username)}" placeholder="e.g. anus" ${u ? 'disabled' : 'required'} pattern="[a-z0-9._-]{3,}" title="lowercase letters, numbers, . _ -"></div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group"><label class="form-label">Email</label><input id="au-email" type="email" class="form-control" value="${esc(u && u.email)}"></div>
+          <div class="form-group"><label class="form-label">Role</label>
+            <select id="au-role" class="form-control">
+              <option value="staff" ${u && u.role === 'staff' ? 'selected' : ''}>Staff — products, orders, storefront</option>
+              <option value="owner" ${u && u.role === 'owner' ? 'selected' : ''}>Owner — everything incl. accounts &amp; users</option>
+            </select></div>
+        </div>
+        <div class="form-group"><label class="form-label">${u ? 'New password (optional)' : 'Password'} ${u ? '' : '<span class="req">*</span>'}</label><input id="au-password" type="password" class="form-control" ${u ? '' : 'required'} minlength="8" autocomplete="new-password" placeholder="at least 8 characters, letters and numbers"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('admin-modal').classList.remove('active')">Cancel</button>
+          <button type="submit" class="btn btn-primary">${u ? 'Save Changes' : 'Create User'}</button>
+        </div>
+      </form>`;
+    modal.classList.add('active');
+  },
+
+  async handleSaveUser(e, id) {
+    e.preventDefault();
+    const v = (i) => document.getElementById(i).value;
+    const payload = { display_name: v('au-name').trim(), email: v('au-email').trim(), role: v('au-role') };
+    if (v('au-password')) payload.password = v('au-password');
+    try {
+      if (id) await API.updateAdminUser(id, payload);
+      else await API.createAdminUser({ ...payload, username: v('au-username').trim().toLowerCase() });
+      State.showToast(id ? 'User updated.' : 'User created — they can sign in now.');
+      document.getElementById('admin-modal').classList.remove('active');
+      await this.renderUsers();
+    } catch (err) { alert('Error: ' + err.message); }
+  },
+
+  async toggleUserActive(id, active) {
+    try { await API.updateAdminUser(id, { is_active: active }); State.showToast(active ? 'User enabled.' : 'User disabled and signed out.'); }
+    catch (err) { alert('Error: ' + err.message); }
+    await this.renderUsers();
+  },
+
+  async deleteUser(id) {
+    const u = this.cachedUsers.find(x => x.id === id);
+    if (!confirm(`Delete admin user "${u ? u.username : id}"? They will no longer be able to sign in.`)) return;
+    try { await API.deleteAdminUser(id); State.showToast('User deleted.'); await this.renderUsers(); }
+    catch (err) { alert('Error: ' + err.message); }
+  },
+
+  openChangePasswordModal() {
+    const modal = document.getElementById('admin-modal'); const body = document.getElementById('admin-modal-body');
+    const me = window.AdminUser || {};
+    body.innerHTML = `
+      <h3 class="modal-title">Change My Password</h3>
+      <p class="modal-sub">Signed in as <strong>${Utils.escapeHtml(me.username || '')}</strong> (${Utils.escapeHtml(me.role || '')}).</p>
+      <form onsubmit="Admin.handleChangePassword(event)">
+        <div class="form-group"><label class="form-label">Current password</label><input id="cp-current" type="password" class="form-control" required autocomplete="current-password"></div>
+        <div class="form-group"><label class="form-label">New password</label><input id="cp-new" type="password" class="form-control" required minlength="8" autocomplete="new-password" placeholder="at least 8 characters, letters and numbers"></div>
+        <div class="form-group"><label class="form-label">Repeat new password</label><input id="cp-new2" type="password" class="form-control" required autocomplete="new-password"></div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('admin-modal').classList.remove('active')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Change Password</button>
+        </div>
+      </form>`;
+    modal.classList.add('active');
+  },
+
+  async handleChangePassword(e) {
+    e.preventDefault();
+    const n = document.getElementById('cp-new').value;
+    if (n !== document.getElementById('cp-new2').value) { alert('The new passwords do not match.'); return; }
+    try {
+      await API.changeOwnPassword(document.getElementById('cp-current').value, n);
+      State.showToast('Password changed.');
+      document.getElementById('admin-modal').classList.remove('active');
+    } catch (err) { alert('Error: ' + err.message); }
   },
 
   // 5. Storefront Settings View — payment methods, homepage banners, collections

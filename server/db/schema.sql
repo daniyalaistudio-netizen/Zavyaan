@@ -135,10 +135,14 @@ CREATE TABLE IF NOT EXISTS order_timeline (
 CREATE TABLE IF NOT EXISTS admin_users (
     id VARCHAR(64) PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    email VARCHAR(150) UNIQUE,
-    role VARCHAR(50) DEFAULT 'admin',
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    password_hash VARCHAR(255) NOT NULL,   -- scrypt (server/utils/password.js)
+    email VARCHAR(150),
+    role VARCHAR(50) DEFAULT 'staff',       -- owner | staff
+    display_name VARCHAR(120),
+    is_active BOOLEAN DEFAULT TRUE,
+    last_login_at TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 10. Store Settings (single JSON document per key; key 'store' holds

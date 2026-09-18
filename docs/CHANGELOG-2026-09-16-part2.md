@@ -250,3 +250,12 @@ matters. Neon's free 0.5 GB holds roughly 2,000 photos at 250 KB; move to R2/S3 
 `render.yaml` (web service only; `DATABASE_URL` and `ADMIN_PASSWORD` prompted,
 `SESSION_SECRET` generated; health check `/api/health`), `.env.example`, `.gitignore`
 (local store and local uploads excluded), README deployment section.
+
+### Multiple admin users (18 Sep, later)
+`admin_users` now holds real accounts (scrypt-hashed, `server/utils/password.js`). Roles
+`owner` / `staff`; `requireRole('owner')` guards `/api/ledger` and `/api/admin/users`;
+analytics returns `finance: null` and no costs/profit for staff. First owner bootstrapped
+from the env vars when the table is empty (`ensureBootstrapOwner`, also at startup).
+Sessions are now per user. Owner-only Users tab (add / edit / role / enable-disable /
+reset password / delete, with "last active owner" protection); everyone gets Change My
+Password. CI suite: +1 test (13).

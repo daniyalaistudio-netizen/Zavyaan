@@ -864,6 +864,7 @@ const db = {
     vendor_payments: ['id', 'vendor_id', 'amount', 'method', 'reference', 'payment_date', 'notes', 'created_at'],
     expenses: ['id', 'category', 'description', 'amount', 'expense_date', 'vendor_id', 'reference', 'notes', 'created_at'],
     admin_sessions: ['id', 'username', 'last_seen', 'user_agent', 'ip', 'created_at'],
+    admin_users: ['id', 'username', 'password_hash', 'email', 'role', 'display_name', 'is_active', 'last_login_at', 'created_at', 'updated_at'],
     uploaded_images: ['id', 'mime', 'bytes', 'size', 'created_at']
   },
 
@@ -882,6 +883,11 @@ const db = {
     await pgPool.query(`CREATE TABLE IF NOT EXISTS vendor_payments (
       id VARCHAR(64) PRIMARY KEY, vendor_id VARCHAR(64) NOT NULL, amount NUMERIC(12,2) NOT NULL, method VARCHAR(50),
       reference VARCHAR(100), payment_date DATE, notes TEXT, created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP)`);
+    // admin_users exists from schema.sql; columns added since
+    await pgPool.query('ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS display_name VARCHAR(120)');
+    await pgPool.query('ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS is_active BOOLEAN DEFAULT TRUE');
+    await pgPool.query('ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMPTZ');
+    await pgPool.query('ALTER TABLE admin_users ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP');
     await pgPool.query(`CREATE TABLE IF NOT EXISTS admin_sessions (
       id VARCHAR(64) PRIMARY KEY, username VARCHAR(100), last_seen TIMESTAMPTZ, user_agent VARCHAR(255), ip VARCHAR(64),
       created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP)`);

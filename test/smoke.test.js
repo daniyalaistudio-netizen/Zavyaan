@@ -188,6 +188,23 @@ test('bulk import: create, update by SKU, and reject bad rows independently', as
   assert.equal((await req(`/products/${r.results[0].id}`, { method: 'DELETE' })).success, true);
 });
 
+test('multiple admins: owner creates staff; staff cannot reach finance', async () => {
+  const created = await post('/admin/users', { username: 'staff1', display_name: 'Staff One', password: 'Staff12345', role: 'staff' });
+  assert.equal(created.status, 201);
+  assert.equal((await post('/admin/users', { username: 'staff1', password: 'Staff12345' })).status, 409, 'duplicate username');
+  const ownerToken = token;
+  const staff = await post('/admin/auth/login', { username: 'staff1', password: 'Staff12345' });
+  assert.equal(staff.user.role, 'staff');
+  token = staff.token;
+  assert.equal((await req('/orders')).status, 200, 'staff sees orders');
+  assert.equal((await req('/ledger/summary')).status, 403, 'staff blocked from ledger');
+  assert.equal((await req('/admin/users')).status, 403, 'staff blocked from user management');
+  assert.equal((await req('/admin/analytics')).finance, null, 'no finance for staff');
+  token = ownerToken;
+  assert.equal((await req('/orders')).status, 200, 'owner session unaffected by staff login');
+  assert.equal((await req(`/admin/users/${created.user.id}`, { method: 'DELETE' })).success, true);
+});
+
 test('a second login signs the first device out', async () => {
   const again = await post('/admin/auth/login', { username: 'admin', password: PASSWORD });
   assert.equal(again.replaced_session, true);

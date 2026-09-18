@@ -90,7 +90,8 @@ const AppRouter = {
       return;
     }
     try {
-      await API.adminMe();
+      const me = await API.adminMe();
+      window.AdminUser = me.user;
     } catch (e) {
       this.renderAdminLogin(container, initialTab, e.message);
       return;
@@ -129,6 +130,7 @@ const AppRouter = {
     try {
       const res = await API.adminLogin(document.getElementById('admin-login-user').value.trim(), document.getElementById('admin-login-pass').value);
       API.setToken(res.token);
+      window.AdminUser = res.user;
       if (res.replaced_session) State.showToast('Signed in — your other device has been signed out.');
       this.renderAdminShell(document.getElementById('app-main'), nextTab);
     } catch (ex) {
@@ -145,6 +147,8 @@ const AppRouter = {
   },
 
   renderAdminShell(container, initialTab = 'dashboard') {
+    const user = window.AdminUser || { username: 'admin', role: 'owner', display_name: 'Admin' };
+    const isOwner = user.role === 'owner';
     container.innerHTML = `
       <div class="admin-layout">
         <aside class="admin-sidebar">
@@ -181,6 +185,7 @@ const AppRouter = {
                 <span>⚙️</span> Storefront &amp; Payments
               </a>
             </li>
+            ${isOwner ? `
             <li class="admin-menu-section">Accounts</li>
             <li class="admin-menu-item">
               <a href="javascript:void(0)" data-tab="vendors" onclick="Admin.switchTab('vendors')">
@@ -197,9 +202,20 @@ const AppRouter = {
                 <span>📈</span> Profit &amp; Ledger
               </a>
             </li>
+            <li class="admin-menu-section">Team</li>
+            <li class="admin-menu-item">
+              <a href="javascript:void(0)" data-tab="users" onclick="Admin.switchTab('users')">
+                <span>👥</span> Admin Users
+              </a>
+            </li>` : ''}
             <li class="admin-menu-item" style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">
               <a href="#home" target="_blank" rel="noopener" title="Opens the shop in a new tab">
                 <span>🌐</span> View Store ↗
+              </a>
+            </li>
+            <li class="admin-menu-item">
+              <a href="javascript:void(0)" onclick="Admin.openChangePasswordModal()" title="Signed in as ${Utils.escapeHtml(user.username)}">
+                <span>👤</span> ${Utils.escapeHtml(user.display_name || user.username)} <small style="opacity: .6; margin-left: 4px;">(${user.role})</small>
               </a>
             </li>
             <li class="admin-menu-item">
@@ -221,8 +237,10 @@ const AppRouter = {
     `;
 
     if (window.Admin && typeof window.Admin.switchTab === 'function') {
-      const known = ['dashboard', 'categories', 'products', 'orders', 'storefront', 'vendors', 'expenses', 'accounts'];
-      window.Admin.switchTab(known.includes(initialTab) ? initialTab : 'dashboard');
+      const ownerOnly = ['vendors', 'expenses', 'accounts', 'users'];
+      const known = ['dashboard', 'categories', 'products', 'orders', 'storefront', ...ownerOnly];
+      const allowed = known.includes(initialTab) && (isOwner || !ownerOnly.includes(initialTab));
+      window.Admin.switchTab(allowed ? initialTab : 'dashboard');
     }
   }
 };

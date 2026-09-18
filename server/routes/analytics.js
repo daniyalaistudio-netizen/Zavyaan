@@ -69,7 +69,8 @@ router.get('/', async (req, res) => {
         ca.revenue = money(ca.revenue + num(it.total_price));
       }
     }
-    const byProduct = Object.values(prodAgg).map(p => ({ ...p, profit: money(p.revenue - p.cost) })).sort((a, b) => b.units - a.units);
+    const byProduct = Object.values(prodAgg).map(p => ({ ...p, profit: money(p.revenue - p.cost) })).sort((a, b) => b.units - a.units)
+      .map(p => (isOwner ? p : { ...p, cost: null, profit: null }));
     const byCategory = Object.values(catAgg).map(c => ({ ...c, orders: c.orders.size })).sort((a, b) => b.units - a.units);
 
     // Incoming: newest orders first, most recent 10, with what they contain
@@ -83,8 +84,11 @@ router.get('/', async (req, res) => {
     const todayKey = dayKey(new Date());
     const lowStock = products.filter(p => num(p.stock_quantity) <= 5).map(p => ({ id: p.id, title: p.title, stock_quantity: num(p.stock_quantity), is_active: p.is_active }));
 
+    // Staff see operations, not money: finance and vendor balances are owner-only.
+    const isOwner = req.admin && req.admin.role === 'owner';
     res.json({
       success: true,
+      role: req.admin ? req.admin.role : 'staff',
       generated_at: new Date().toISOString(),
       window_days: days,
       kpis: {
@@ -96,11 +100,12 @@ router.get('/', async (req, res) => {
         delivered: orders.filter(o => o.order_status === 'Delivered').length,
         exceptions: orders.filter(o => OrderStatus.isException(o.order_status)).length,
         average_order_value: sales.length ? money(summary.pnl.revenue / sales.length) : 0,
+        revenue_today_visible: true,
         products_total: products.length,
         products_live: products.filter(p => p.is_active).length,
         low_stock: lowStock.length,
         stock_units: products.reduce((s, p) => s + num(p.stock_quantity), 0),
-        stock_value_at_cost: money(products.reduce((s, p) => s + num(p.stock_quantity) * num(p.cost_price), 0))
+        stock_value_at_cost: isOwner ? money(products.reduce((s, p) => s + num(p.stock_quantity) * num(p.cost_price), 0)) : null
       },
       by_day: Object.values(byDay),
       by_status: byStatus,
@@ -108,8 +113,8 @@ router.get('/', async (req, res) => {
       by_category: byCategory,
       incoming,
       low_stock: lowStock,
-      finance: summary.pnl,
-      vendor_totals: summary.totals
+      finance: isOwner ? summary.pnl : null,
+      vendor_totals: isOwner ? summary.totals : null
     });
   } catch (err) {
     console.error('[API Analytics] Error:', err);

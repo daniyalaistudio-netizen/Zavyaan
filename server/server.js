@@ -38,7 +38,7 @@ app.use('/api/products', auth.requireAdminForAll, adminWrite, require('./routes/
 app.use('/api/orders', require('./routes/orders'));            // inside: POST + track public, rest admin
 app.use('/api/customer', require('./routes/customer'));
 app.use('/api/settings', auth.requireAdminForAll, adminWrite, require('./routes/settings'));
-app.use('/api/ledger', auth.requireAdmin, require('./routes/ledger').router);
+app.use('/api/ledger', auth.requireRole('owner'), require('./routes/ledger').router);
 app.use('/api/uploads', require('./routes/uploads').router);   // inside: management routes admin
 app.use('/api/admin/analytics', auth.requireAdmin, require('./routes/analytics'));
 app.use('/api/admin', require('./routes/admin'));
@@ -57,6 +57,7 @@ app.get('/api/health', (req, res) => {
 async function initStore() {
   try {
     await db.applySchema();
+    await require('./middleware/admin-auth').ensureBootstrapOwner();
     const cats = await db.getCategories(true);
     if (!cats || cats.length === 0) {
       console.log('[App] Empty database detected. Auto-seeding initial categories and sample products...');

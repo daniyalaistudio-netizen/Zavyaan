@@ -609,7 +609,12 @@ const API = {
   async getAdminStats() { return this.request('/admin/stats'); },
   async adminLogin(username, password) { return this.request('/admin/auth/login', { method: 'POST', body: JSON.stringify({ username, password }) }); },
   async adminLogout() { try { await this.request('/admin/auth/logout', { method: 'POST' }); } catch (e) { /* already out */ } this.setToken(''); },
-  async adminMe() { return this.request('/admin/auth/me'); }
+  async adminMe() { return this.request('/admin/auth/me'); },
+  async changeOwnPassword(current_password, new_password) { return this.request('/admin/auth/password', { method: 'POST', body: JSON.stringify({ current_password, new_password }) }); },
+  async getAdminUsers() { return this.request('/admin/users'); },
+  async createAdminUser(payload) { return this.request('/admin/users', { method: 'POST', body: JSON.stringify(payload) }); },
+  async updateAdminUser(id, payload) { return this.request(`/admin/users/${id}`, { method: 'PUT', body: JSON.stringify(payload) }); },
+  async deleteAdminUser(id) { return this.request(`/admin/users/${id}`, { method: 'DELETE' }); }
 };
 
 window.API = API;

@@ -7,6 +7,13 @@ const auth = require('../middleware/admin-auth');
 router.post('/auth/login', auth.login);
 router.post('/auth/logout', auth.logout);
 router.get('/auth/me', auth.requireAdmin, auth.me);
+router.post('/auth/password', auth.requireAdmin, auth.changeOwnPassword);
+
+// Admin users (owner only)
+router.get('/users', auth.requireRole('owner'), auth.listUsers);
+router.post('/users', auth.requireRole('owner'), auth.createUser);
+router.put('/users/:id', auth.requireRole('owner'), auth.updateUser);
+router.delete('/users/:id', auth.requireRole('owner'), auth.deleteUser);
 
 // GET Admin Dashboard Statistics
 router.get('/stats', auth.requireAdmin, async (req, res) => {
